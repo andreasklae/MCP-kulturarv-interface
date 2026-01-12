@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply font-body text-stone-200 antialiased;
+    background: linear-gradient(135deg, #162628 0%, #1f2124 50%, #293e40 100%);
+    min-height: 100vh;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-stone-900/50;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-fjord-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-fjord-600;
+  }
+}
+
+@layer components {
+  .chat-bubble {
+    @apply relative px-4 py-3 rounded-2xl max-w-[85%] animate-slide-up;
+  }
+
+  .chat-bubble-user {
+    @apply bg-fjord-600 text-white ml-auto rounded-br-sm;
+  }
+
+  .chat-bubble-assistant {
+    @apply bg-stone-800/80 text-stone-100 mr-auto rounded-bl-sm border border-stone-700/50;
+  }
+
+  .source-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full;
+  }
+
+  .input-field {
+    @apply w-full bg-stone-800/60 border border-stone-700/50 rounded-xl px-4 py-3
+           text-stone-100 placeholder-stone-500
+           focus:outline-none focus:ring-2 focus:ring-fjord-500/50 focus:border-fjord-500
+           transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-fjord-600 hover:bg-fjord-500 text-white font-medium rounded-xl
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus:ring-2 focus:ring-fjord-500/50;
+  }
+
+  .source-toggle {
+    @apply flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer
+           transition-all duration-200 select-none;
+  }
+
+  .source-toggle-active {
+    @apply bg-fjord-700/50 border-fjord-500;
+  }
+
+  .source-toggle-inactive {
+    @apply bg-stone-800/40 border-stone-700/50 hover:bg-stone-800/60;
+  }
+}
+
+/* Markdown-like styling for responses */
+.prose-chat {
+  @apply leading-relaxed;
+}
+
+.prose-chat p {
+  @apply mb-3 last:mb-0;
+}
+
+.prose-chat ul, .prose-chat ol {
+  @apply mb-3 pl-5 space-y-1;
+}
+
+.prose-chat li {
+  @apply list-disc;
+}
+
+.prose-chat ol li {
+  @apply list-decimal;
+}
+
+.prose-chat strong {
+  @apply font-semibold text-white;
+}
+
+.prose-chat code {
+  @apply font-mono text-sm bg-stone-900/50 px-1.5 py-0.5 rounded;
+}
+
+.prose-chat a {
+  @apply text-rune hover:underline;
+}
