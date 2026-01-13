@@ -376,7 +376,7 @@ function App() {
     setInput('');
     setIsLoading(true);
     setError(null);
-    setStatusMessage(t('analyzingQuestion'));
+    setStatusMessage(t('selectingSources'));
 
     try {
       const history = messages.slice(-10).map(m => ({
@@ -389,13 +389,12 @@ function App() {
         sources: sourcesToUse,
         conversation_history: history,
       }, {
-        onStatus: () => {
-          // Keep showing analyzing status
-          setStatusMessage(t('analyzingQuestion'));
+        onStatus: (message) => {
+          // Use the backend status message directly (includes dynamic count)
+          setStatusMessage(message);
         },
         onToolStart: (tool) => {
-          // Show exploring sources status
-          setStatusMessage(t('exploringSources'));
+          // Status will be updated by onStatus callback
           
           // Add tool to status list
           setMessages(prev => prev.map(msg => 
@@ -411,8 +410,7 @@ function App() {
           ));
         },
         onToolEnd: (tool, success, preview) => {
-          // Keep showing exploring sources
-          setStatusMessage(t('exploringSources'));
+          // Status will be updated by onStatus callback
           
           // Update tool status
           setMessages(prev => prev.map(msg => 
@@ -703,7 +701,7 @@ function App() {
                 {message.role === 'assistant' && message.isStreaming && !message.content ? (
                   <div className="chatkit-streaming-status">
                     <LoaderIcon />
-                    <span>{statusMessage || t('analyzingQuestion')}</span>
+                    <span>{statusMessage || t('selectingSources')}</span>
                   </div>
                 ) : (
                   <div className="chatkit-message-bubble">

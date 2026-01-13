@@ -125,14 +125,14 @@ const translations = {
     en: 'Related questions',
   },
 
-  // Status messages
-  analyzingQuestion: {
-    no: 'Analyserer spørsmål...',
-    en: 'Analyzing question...',
+  // Status messages (V2 Agent)
+  selectingSources: {
+    no: 'Velger kilder...',
+    en: 'Selecting sources...',
   },
-  exploringSources: {
-    no: 'Utforsker kilder...',
-    en: 'Exploring sources...',
+  searchingInSources: {
+    no: 'Søker i kilder...',
+    en: 'Searching sources...',
   },
   generatingResponse: {
     no: 'Genererer svar...',
