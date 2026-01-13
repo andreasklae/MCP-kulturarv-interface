@@ -181,7 +181,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const t = useCallback((key: TranslationKey, replacements?: Record<string, string | number>): string => {
-    let text = translations[key]?.[language] || translations[key]?.['en'] || key;
+    let text: string = translations[key]?.[language] || translations[key]?.['en'] || key;
     
     if (replacements) {
       Object.entries(replacements).forEach(([k, v]) => {
