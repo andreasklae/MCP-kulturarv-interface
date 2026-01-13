@@ -33,6 +33,21 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify build output
+        run: |
+          echo "Build output contents:"
+          ls -la dist/
+          echo "---"
+          ls -la dist/assets/ || echo "No assets folder"
+          echo "---"
+          if [ -f dist/index.html ]; then
+            echo "✓ index.html exists"
+            head -5 dist/index.html
+          else
+            echo "✗ index.html missing!"
+            exit 1
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
@@ -47,7 +62,27 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 10
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: ./artifact-check
+      
+      - name: Verify artifact contents
+        run: |
+          echo "Artifact contents:"
+          ls -la ./artifact-check/ || echo "Artifact folder not found"
+          echo "---"
+          if [ -f ./artifact-check/index.html ]; then
+            echo "✓ index.html found in artifact"
+            wc -l ./artifact-check/index.html
+          else
+            echo "✗ index.html missing in artifact!"
+            exit 1
+          fi
+      
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
