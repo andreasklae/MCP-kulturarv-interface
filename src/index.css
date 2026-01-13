@@ -589,7 +589,7 @@
 }
 
 .chatkit-message-text {
-  white-space: pre-wrap;
+  white-space: normal;
   word-break: break-word;
 }
 
@@ -1102,31 +1102,29 @@
 .prose h3 { font-size: 1.05em; }
 
 .prose p {
-  margin: 0;
+  margin: 0 0 0.6em 0;
 }
 
 .prose ul {
   list-style: disc;
-  padding-left: 1.5em;
-  margin: 0;
+  padding-left: 1.4em;
+  margin: 0 0 0.45em;
 }
 
 .prose ol {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-  counter-reset: ol-counter;
+  list-style: decimal;
+  list-style-position: outside;
+  padding-left: 1.4em;
+  margin: 0 0 0.45em;
 }
 
 .prose ol > li {
-  counter-increment: ol-counter;
-  display: flex;
-  gap: 0.35em;
+  margin: 0.02em 0 0.12em;
+  padding-left: 0.05em;
 }
 
 .prose ol > li::before {
-  content: counter(ol-counter) ".";
-  flex-shrink: 0;
+  content: none;
 }
 
 .prose ol > li > p {
@@ -1134,10 +1132,11 @@
 }
 
 .prose li {
-  margin: 0;
+  margin: 0.05em 0;
 }
 
-.prose li p {
+.prose li > p {
+  display: inline;
   margin: 0;
 }
 
@@ -1145,8 +1144,13 @@
 .prose li > ul,
 .prose li > ol {
   display: block;
+  margin-top: 0.15em;
+  padding-left: 1.2em;
+}
+
+.prose p + ul,
+.prose p + ol {
   margin-top: 0.25em;
-  padding-left: 1.5em;
 }
 
 .prose a {
